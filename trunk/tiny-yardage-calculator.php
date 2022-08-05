@@ -9,76 +9,40 @@ Author URI: https://kelseybarmettler.com
 
 // Add calculator function
 function get_yardageCalc($atts = array()) {
-	// set up default parameters
+
 	extract(shortcode_atts(array(
-		'form_label' => 'Enter your dimensions',
-		'length_label' => 'Enter Length (Ft)',
-		'width_label' => 'Enter Width (Ft)',
-		'depth_label' => 'Enter Depth (In)',
-		'result_label' => 'Total Yards Needed',
+		'form_label' 		=> 'Enter your dimensions',
+		'length_label' 		=> 'Enter Length (Ft)',
+		'width_label' 		=> 'Enter Width (Ft)',
+		'depth_label'		=> 'Enter Depth (In)',
+		'result_label'		=> 'Total Yards Needed',
+		'type' 				=> 'rectangle',
+		'circle_form_label' => 'Enter your circular dimensions',
+		'radius_label'		=> 'Enter Radius (Ft)',
+		'rounding' 			=> 'whole',
 	), $atts));
 
-	return '<script type="text/javascript">
-		function calc() {
-		  /*info:
-		    1 yard   =      3 feet   = 36 inches
-		    1 foot   =     12 inches
-		    N feet   = (N/ 3) yards
-		    N inches = (N/12) feet
-		    N inches = (N/36) yards
-		  */
+	ob_start();
+	if (isset($atts['type']) && 'circle' == $atts['type']) {
+		if (isset($atts['rounding']) && 'hundredths' == $atts['rounding']) {
+			$rounding = 'var vc = Math.round( vc * 100) / 100;';
+		} else {
+			$rounding = 'var vc = Math.ceil(vc);';
+		}
+		include 'circle.php';
+	} else {
+		// define the rounding methods
+		if (isset($atts['rounding']) && 'hundredths' == $atts['rounding']) {
+			$rounding = 'var v = Math.round( v * 100) / 100;';
+		} else {
+			$rounding = 'var v = Math.ceil(v);';
+		}
+		include 'rectangle.php';
+	}
 
-		  //get inputs
-		  var l = document.volcalc.length.value; // in feet
-		  var w = document.volcalc.width.value; // in feet
-		  var d = document.volcalc.depth.value; // in inches
-
-		  //convert length feet to yards
-		  l = l/3;
-
-		  //convert width feet to yards
-		  w = w/3;
-
-		  //convert depth inches to yards
-		  d = d/36;
-
-		  //calculate volume in yards
-		  var v = l * w * d;
-
-		  // round numbers up to nearest whole number
-		  var v = Math.ceil( v );
-
-		  // round to 2 decimal places
-		  //var v = Math.round( v * 100) / 100;
-
-		  // round numbers in increments of .25
-		  // var v = Math.round( v * 4 ) / 4 ;
-
-		  document.volcalc.vol.value = v; //in yards
-
-}	</script>
-	<form name="volcalc">
-	<fieldset>
-
-	    <legend>' . $form_label . '</legend>
-	    <label class="field_name">' . $length_label . '</label>
-	    <input name="length" class="field" onkeyup="calc();" type="text" />
-	    <br />
-	    <label class="field_name">' . $width_label . '</label>
-	    <input name="width" class="field" onkeyup="calc();" type="text" />
-	    <br />
-	    <label class="field_name">' . $depth_label . '</label>
-	    <input name="depth" class="field" onkeyup="calc();" type="text" />
-	    <br />
-	</fieldset>
-
-	<fieldset>
-	    <legend>Total</legend>
-	    <label class="field_name">' . $result_label . '</label>
-	    <input name="vol" class="field_total" type="text" />
-	</fieldset>
-
-	</form>	';
+	$output = ob_get_contents();
+	ob_end_clean();
+	return $output;
 }
 //Add shortcode
 add_shortcode('yardagecalc', 'get_yardageCalc');
