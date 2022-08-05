@@ -27,15 +27,18 @@ The calculator has no dependencies, adds nothing to your WordPress dashboard, an
 
 == Frequently Asked Questions ==
 
+= Can you adjust the calculator to round values to two decimal points (hundredths place)? =
+Sure! Just add rounding="hundredths" to your shortcode, like so:
+`[yardagecalc rounding="hundredths"]`
 = How do I change the text on the form labels? =
 
 Optionally, you may change the text on the form labels by adding attributes to your shortcode. For example, if you wanted to change just the label on the result field, you would use the following shortcode:
-[yardagecalc result_label="Your custom text here"]
+`[yardagecalc result_label="Your custom text here"]`
 
 Just replace the text inside the quotes with your own text. Wrapping your custom text in quotes, as in the example above, is necessary to ensure your labels display properly.
 
 Here's an example shortcode with ALL the labels customized:
-[yardagecalc form_label="Your custom text here" length_label="Your custom text here" width_label="Your custom text here" depth_label="Your custom text here" result_label="Your custom text here"]
+`[yardagecalc form_label="Your custom text here" length_label="Your custom text here" width_label="Your custom text here" depth_label="Your custom text here" result_label="Your custom text here"]`
 
 You can choose to replace or translate the text on all, some, or none of your fields. If you want to use the default text on a label, just leave that attribute out of the shortcode. The bare shortcode [yardagecalc] will use the default labels for all fields.
 
