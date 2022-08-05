@@ -23,20 +23,23 @@ function get_yardageCalc($atts = array()) {
 	), $atts));
 
 	ob_start();
+	//conditionally choose the appropriate calculator type for the shape– default is rectangle
 	if (isset($atts['type']) && 'circle' == $atts['type']) {
 		if (isset($atts['rounding']) && 'hundredths' == $atts['rounding']) {
 			$rounding = 'var vc = Math.round( vc * 100) / 100;';
 		} else {
 			$rounding = 'var vc = Math.ceil(vc);';
 		}
+		// get the circle calculator
 		include 'circle.php';
 	} else {
-		// define the rounding methods
+		// choose the rounding method– default is whole
 		if (isset($atts['rounding']) && 'hundredths' == $atts['rounding']) {
 			$rounding = 'var v = Math.round( v * 100) / 100;';
 		} else {
 			$rounding = 'var v = Math.ceil(v);';
 		}
+		// get the rectangle calculator unless user says otherwise
 		include 'rectangle.php';
 	}
 
