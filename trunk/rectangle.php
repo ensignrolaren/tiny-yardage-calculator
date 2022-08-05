@@ -1,27 +1,27 @@
 <script type="text/javascript">
 	function tyc_calc() {
 
-		//get inputs
+		// get inputs
 		var l = document.volcalc.length.value; // in feet
 		var w = document.volcalc.width.value; // in feet
 		var d = document.volcalc.depth.value; // in inches
 
-		//convert length feet to yards
+		// Convert length in feet to yards
 		l = l / 3;
 
-		//convert width feet to yards
+		// Convert width in feet to yards
 		w = w / 3;
 
-		//convert depth inches to yards
+		// Convert depth in inches to yards
 		d = d / 36;
 
-		//calculate volume in yards
+		// Calculate volume in yards
 		var v = l * w * d;
 
-		// round numbers by the default, rounding, or to hundredths if that attribute is set (see lines 22-29)
+		// Round numbers by the default (whole), or to hundredths if that attribute is set
 		<?php echo $rounding; ?>
 
-		document.volcalc.vol.value = v; //in yards
+		document.volcalc.vol.value = v; // in yards
 
 	}
 </script>
