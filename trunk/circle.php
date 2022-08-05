@@ -1,23 +1,24 @@
 <script type="text/javascript">
 	function tyc_circleCalc() {
 
-		//get inputs
+		// Get inputs
 		var r = document.circlecalc.radius.value; // in feet
 		var dc = document.circlecalc.depth.value; // in inches
 
-		// multiply radius by itself 
+		// Multiply radius by itself 
 		r = r * r;
 
-		//convert depth inches to feet
+		// Convert depth in inches to feet
 		dc = dc / 12;
 
-		//calculate volume in yards
+		// Calculate volume of the circular area to be filled, in yards...in other words:
+		// radius squared ×  depth of circle × ~ratio of circle's circumference to its diameter × number of cubic ft in a yard
 		var vc = r * dc * 3.14 / 27;
 
-		// round numbers by the default, rounding, or to hundredths if that attribute is set (see lines 22-29)
+		// Round numbers by the default (whole) or to hundredths if that attribute is set
 		<?php echo $rounding; ?>
 
-		document.circlecalc.vol.value = vc; //in yards
+		document.circlecalc.vol.value = vc; // in yards
 
 	}
 </script>
