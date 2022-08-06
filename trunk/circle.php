@@ -1,5 +1,5 @@
 <script type="text/javascript">
-	function tyc_circleCalc() {
+	function tyc_circlecalc() {
 
 		// Get inputs
 		var r = document.circlecalc.radius.value; // in feet
@@ -24,12 +24,12 @@
 </script>
 <form name="circlecalc" class="tyc-form">
 	<fieldset class="tyc-inputs">
-		<legend><?php echo $circle_form_label; ?></legend>
+		<legend><?php echo $form_label; ?></legend>
 		<label class="field_name"><?php echo $radius_label; ?></label>
-		<input name="radius" class="tyc-field field" onkeyup="tyc_circleCalc();" type="text" />
+		<input name="radius" class="tyc-field field" onkeyup="tyc_circlecalc();" type="text" />
 		<br />
 		<label class="field_name"><?php echo $depth_label; ?></label>
-		<input name="depth" class="tyc-field field" onkeyup="tyc_circleCalc();" type="text" />
+		<input name="depth" class="tyc-field field" onkeyup="tyc_circlecalc();" type="text" />
 		<br />
 	</fieldset>
 

@@ -11,19 +11,22 @@ Author URI: https://kelseybarmettler.com
 function get_yardageCalc($atts = array()) {
 
 	extract(shortcode_atts(array(
-		'form_label' 		=> 'Enter your dimensions',
-		'length_label' 		=> 'Enter Length (Ft)',
-		'width_label' 		=> 'Enter Width (Ft)',
-		'depth_label'		=> 'Enter Depth (In)',
-		'result_label'		=> 'Total Yards Needed',
-		'type' 				=> 'rectangle',
-		'circle_form_label' => 'Enter your circular dimensions',
-		'radius_label'		=> 'Enter Radius (Ft)',
-		'rounding' 			=> 'whole',
+		'form_label' 			=> 'Enter your dimensions',
+		'length_label' 			=> 'Enter Length (Ft)',
+		'width_label' 			=> 'Enter Width (Ft)',
+		'depth_label'			=> 'Enter Depth (In)',
+		'result_label'			=> 'Total Yards Needed',
+		'type' 					=> 'rectangle',
+		'circle_form_label' 	=> 'Enter dimensions of the circular area',
+		'radius_label'			=> 'Enter Radius (Ft)',
+		'rounding' 				=> 'whole',
+		'triangle_form_label' 	=> 'Enter dimensions of the right triangular area',
+		'base_label' 			=> 'Enter Base (Ft)',
+		'height_label' 			=> 'Enter Height (Ft)',
 	), $atts));
 
 	ob_start();
-	//conditionally choose the appropriate calculator type for the shape– default is rectangle
+	// Conditionally choose the appropriate calculator type for the shape– default is rectangle
 	if (isset($atts['type']) && 'circle' == $atts['type']) {
 		if (isset($atts['rounding']) && 'hundredths' == $atts['rounding']) {
 			$rounding = 'var vc = Math.round( vc * 100) / 100;';
@@ -32,14 +35,22 @@ function get_yardageCalc($atts = array()) {
 		}
 		// get the circle calculator
 		include 'circle.php';
+	} elseif (isset($atts['type']) && 'triangle' == $atts['type']) {
+		if (isset($atts['rounding']) && 'hundredths' == $atts['rounding']) {
+			$rounding = 'var vt = Math.round( vt * 100) / 100;';
+		} else {
+			$rounding = 'var vt = Math.ceil(vt);';
+		}
+		// Get the triangle calculator
+		include 'triangle.php';
 	} else {
-		// choose the rounding method– default is whole
+		// Choose the rounding method– default is whole
 		if (isset($atts['rounding']) && 'hundredths' == $atts['rounding']) {
 			$rounding = 'var v = Math.round( v * 100) / 100;';
 		} else {
 			$rounding = 'var v = Math.ceil(v);';
 		}
-		// get the rectangle calculator unless user says otherwise
+		// Get the rectangle calculator unless user says otherwise
 		include 'rectangle.php';
 	}
 
