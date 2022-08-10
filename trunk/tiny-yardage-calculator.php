@@ -3,7 +3,7 @@
 Plugin Name: Tiny Yardage Calculator
 Description: Calculates yards of material needed to cover square feet to a given depth in inches. Use shortcode [yardagecalc]. User enters dimensions, calculator returns results in yards rounded up to whole number.
 Author: Kelsey Barmettler
-Version: 1.1
+Version: 1.2.1
 Author URI: https://kelseybarmettler.com
 */
 
